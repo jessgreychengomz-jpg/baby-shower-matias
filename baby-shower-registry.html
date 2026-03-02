@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Baby Shower de Matías</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Playfair+Display:ital@0;1&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Quicksand', sans-serif;
+    background: #f5f0e8;
+    min-height: 100vh;
+    color: #4a5240;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, #e8f0e0 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, #ede8dc 0%, transparent 50%),
+      radial-gradient(circle at 50% 90%, #e4edd8 0%, transparent 40%);
+    pointer-events: none; z-index: 0;
+  }
+
+  header {
+    text-align: center; padding: 48px 20px 32px;
+    position: relative; z-index: 1;
+  }
+  .header-badge {
+    display: inline-block; background: white;
+    border: 2px solid #a8c490; border-radius: 50px;
+    padding: 6px 20px; font-size: 12px; color: #6a9a50;
+    letter-spacing: 2px; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 16px;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: #5a8040; line-height: 1.2; margin-bottom: 8px;
+  }
+  header p { color: #8a9a7a; font-size: 15px; max-width: 460px; margin: 0 auto 28px; }
+  .decorations { font-size: 28px; margin-bottom: 8px; }
+
+  /* Sheet setup */
+  .sheet-setup {
+    background: white; border: 2px dashed #a8c490;
+    border-radius: 20px; padding: 28px;
+    max-width: 600px; margin: 0 auto 40px;
+    text-align: center; position: relative; z-index: 1;
+  }
+  .sheet-setup h3 { color: #5a8040; margin-bottom: 8px; font-size: 16px; }
+  .sheet-setup p { font-size: 13px; color: #8a9a7a; margin-bottom: 16px; line-height: 1.6; }
+  .sheet-setup .input-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .sheet-setup input {
+    flex: 1; min-width: 200px; border: 2px solid #a8c490;
+    border-radius: 12px; padding: 10px 16px;
+    font-family: inherit; font-size: 13px; color: #4a5240;
+    outline: none; transition: border-color .2s;
+  }
+  .sheet-setup input:focus { border-color: #6a9a50; }
+  .btn-load {
+    background: linear-gradient(135deg, #8ec46a, #5a8040);
+    color: white; border: none; border-radius: 12px;
+    padding: 10px 22px; font-family: inherit; font-size: 14px;
+    font-weight: 700; cursor: pointer; transition: opacity .2s, transform .1s; white-space: nowrap;
+  }
+  .btn-load:hover { opacity: .9; transform: translateY(-1px); }
+  .sheet-note {
+    margin-top: 14px; font-size: 12px; color: #9aaa8a;
+    line-height: 1.7; text-align: left;
+    background: #f5f0e8; border-radius: 10px; padding: 10px 14px;
+  }
+  .sheet-note code {
+    background: #e4edd8; color: #5a8040;
+    padding: 1px 6px; border-radius: 4px; font-size: 11px;
+  }
+
+  /* Stats */
+  .stats {
+    display: flex; gap: 16px; justify-content: center;
+    flex-wrap: wrap; margin: 0 auto 32px;
+    max-width: 700px; padding: 0 20px;
+    position: relative; z-index: 1;
+  }
+  .stat-pill {
+    background: white; border: 2px solid #a8c490;
+    border-radius: 50px; padding: 8px 20px;
+    font-size: 13px; font-weight: 600; color: #5a8040;
+    display: flex; align-items: center; gap: 6px;
+    box-shadow: 0 2px 8px rgba(90,128,64,.1);
+  }
+
+  /* Filters */
+  .filters {
+    display: flex; gap: 10px; justify-content: center;
+    flex-wrap: wrap; padding: 0 20px; margin-bottom: 32px;
+    position: relative; z-index: 1;
+  }
+  .filter-btn {
+    background: white; border: 2px solid #a8c490;
+    border-radius: 50px; padding: 8px 20px;
+    font-family: inherit; font-size: 13px; font-weight: 600;
+    color: #8a9a7a; cursor: pointer; transition: all .2s;
+  }
+  .filter-btn.active, .filter-btn:hover {
+    background: linear-gradient(135deg, #8ec46a, #5a8040);
+    border-color: transparent; color: white;
+  }
+
+  /* Grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 24px; max-width: 1100px;
+    margin: 0 auto; padding: 0 20px 60px;
+    position: relative; z-index: 1;
+  }
+
+  /* Card */
+  .card {
+    background: white; border-radius: 24px; overflow: hidden;
+    box-shadow: 0 4px 20px rgba(90,128,64,.1);
+    transition: transform .25s, box-shadow .25s;
+    display: flex; flex-direction: column;
+    border: 2px solid transparent;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(90,128,64,.18); }
+  .card.fully-reserved { border-color: #a8c490; opacity: .82; }
+
+  .card-img {
+    width: 100%; height: 190px;
+    background: linear-gradient(135deg, #e4edd8, #ede8dc);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 64px; position: relative;
+  }
+
+  .qty-bar-wrap {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: rgba(255,255,255,.75); padding: 8px 14px 10px;
+    backdrop-filter: blur(4px);
+  }
+  .qty-label {
+    display: flex; justify-content: space-between;
+    font-size: 11px; font-weight: 700; color: #5a8040; margin-bottom: 5px;
+  }
+  .qty-bar-bg { height: 7px; background: #e4edd8; border-radius: 99px; overflow: hidden; }
+  .qty-bar-fill {
+    height: 100%; border-radius: 99px;
+    background: linear-gradient(90deg, #8ec46a, #5a8040);
+    transition: width .4s ease;
+  }
+  .qty-bar-fill.full { background: linear-gradient(90deg, #c4a86a, #806040); }
+
+  .fully-reserved-badge {
+    position: absolute; top: 12px; right: 12px;
+    background: linear-gradient(135deg, #c4a86a, #806040);
+    color: white; font-size: 11px; font-weight: 700;
+    padding: 4px 12px; border-radius: 50px; letter-spacing: .5px;
+  }
+  .spots-badge {
+    position: absolute; top: 12px; right: 12px;
+    background: linear-gradient(135deg, #8ec46a, #5a8040);
+    color: white; font-size: 11px; font-weight: 700;
+    padding: 4px 12px; border-radius: 50px;
+  }
+
+  .card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+  .card-name { font-size: 17px; font-weight: 700; color: #4a5240; line-height: 1.3; }
+
+  .card-priority {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 12px; font-weight: 700; padding: 4px 12px;
+    border-radius: 50px; width: fit-content;
+  }
+  .card-priority.priority-imprescindible { background: #fdecea; color: #c0392b; }
+  .card-priority.priority-muy-recomendado { background: #eafaf1; color: #1e8449; }
+
+  .card-rec {
+    background: #f0f5e8; border-left: 3px solid #a8c490;
+    border-radius: 0 8px 8px 0; padding: 8px 12px;
+    font-size: 12px; color: #5a8040; font-style: italic; line-height: 1.5;
+  }
+  .card-rec span { font-weight: 700; font-style: normal; }
+
+  .card-footer { padding: 0 20px 20px; display: flex; flex-direction: column; gap: 10px; }
+
+  .btn-store {
+    display: block; text-align: center;
+    background: #f0f5e8; color: #5a8040;
+    border: 2px solid #a8c490; border-radius: 12px;
+    padding: 9px; font-family: inherit; font-size: 13px;
+    font-weight: 700; text-decoration: none; transition: all .2s;
+  }
+  .btn-store:hover { background: #e4edd8; }
+
+  .reservations-list { display: flex; flex-direction: column; gap: 5px; }
+  .reservation-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; color: #6a9a50; font-weight: 600;
+    background: #f0f5e8; border-radius: 8px; padding: 6px 10px;
+  }
+  .reservation-item .dot { width: 7px; height: 7px; border-radius: 50%; background: #8ec46a; flex-shrink: 0; }
+
+  .reserve-area { display: flex; flex-direction: column; gap: 8px; }
+  .reserve-area input {
+    border: 2px solid #a8c490; border-radius: 12px;
+    padding: 9px 14px; font-family: inherit; font-size: 13px;
+    color: #4a5240; outline: none; transition: border-color .2s; width: 100%;
+  }
+  .reserve-area input:focus { border-color: #5a8040; }
+
+  .btn-reserve {
+    width: 100%;
+    background: linear-gradient(135deg, #8ec46a, #5a8040);
+    color: white; border: none; border-radius: 12px;
+    padding: 10px; font-family: inherit; font-size: 14px;
+    font-weight: 700; cursor: pointer; transition: opacity .2s, transform .1s;
+  }
+  .btn-reserve:hover { opacity: .9; transform: translateY(-1px); }
+  .btn-reserve:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+
+  .fully-taken-msg {
+    text-align: center; font-size: 13px;
+    color: #9a7a50; font-weight: 600; padding: 6px 0;
+  }
+
+  /* Loading overlay */
+  .loading-bar {
+    position: fixed; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, #8ec46a, #5a8040);
+    z-index: 200; transform: scaleX(0); transform-origin: left;
+    transition: transform .3s ease; border-radius: 0 4px 4px 0;
+  }
+  .loading-bar.active { transform: scaleX(1); }
+
+  .saving-indicator {
+    position: fixed; bottom: 20px; right: 20px;
+    background: white; border: 2px solid #a8c490;
+    border-radius: 50px; padding: 8px 18px;
+    font-size: 13px; font-weight: 600; color: #5a8040;
+    box-shadow: 0 4px 16px rgba(90,128,64,.15);
+    z-index: 200; opacity: 0; transition: opacity .3s;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .saving-indicator.show { opacity: 1; }
+  .spinner {
+    width: 14px; height: 14px; border: 2px solid #a8c490;
+    border-top-color: #5a8040; border-radius: 50%;
+    animation: spin .7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .message-box {
+    text-align: center; padding: 60px 20px;
+    color: #8a9a7a; font-size: 15px; grid-column: 1 / -1;
+  }
+  .message-box .icon { font-size: 48px; margin-bottom: 12px; }
+
+  /* Modal */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(74,82,64,.4); backdrop-filter: blur(4px);
+    z-index: 100; align-items: center; justify-content: center; padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: white; border-radius: 24px; padding: 36px;
+    max-width: 400px; width: 100%; text-align: center;
+    box-shadow: 0 20px 60px rgba(90,128,64,.25);
+    animation: popIn .3s ease;
+  }
+  @keyframes popIn { from { transform: scale(.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .modal .icon { font-size: 56px; margin-bottom: 12px; }
+  .modal h3 { font-family: 'Playfair Display', serif; color: #5a8040; font-size: 22px; margin-bottom: 8px; }
+  .modal p { color: #8a9a7a; font-size: 14px; margin-bottom: 24px; line-height: 1.6; }
+  .btn-close-modal {
+    background: linear-gradient(135deg, #8ec46a, #5a8040);
+    color: white; border: none; border-radius: 12px;
+    padding: 12px 32px; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div class="loading-bar" id="loadingBar"></div>
+<div class="saving-indicator" id="savingIndicator">
+  <div class="spinner"></div> Guardando...
+</div>
+
+<header>
+  <div class="decorations">🌿 🍼 🌱</div>
+  <div class="header-badge">Baby Shower · Matías</div>
+  <h1>¡Bienvenido, Matías!</h1>
+  <p>Explora la lista de regalos y reserva el que quieras dar. Cada regalo es una muestra de amor para el bebé 💚</p>
+</header>
+
+<div class="sheet-setup" id="sheetSetup">
+  <h3>📋 Conecta tu Google Sheet</h3>
+  <p>Pega el enlace <strong>publicado en CSV</strong> de tu Google Sheets para cargar la lista de regalos.</p>
+  <div class="input-row">
+    <input type="text" id="sheetUrl" placeholder="https://docs.google.com/spreadsheets/d/.../pub?output=csv" />
+    <button class="btn-load" onclick="loadSheet()">Cargar Regalos ✨</button>
+  </div>
+  <div class="sheet-note">
+    <strong>Cómo obtener el enlace:</strong><br>
+    1. Abre tu Google Sheet → <code>Archivo</code> → <code>Compartir</code> → <code>Publicar en la web</code><br>
+    2. Selecciona <code>Documento completo</code> y formato <code>Valores separados por comas (.csv)</code><br>
+    3. Haz clic en <code>Publicar</code> y pega el enlace arriba<br><br>
+    <strong>Columnas requeridas:</strong> <code>name</code> · <code>priority</code> · <code>recommendation</code> · <code>store_link</code> · <code>quantity</code> · <code>emoji</code> (opcional)
+  </div>
+</div>
+
+<div class="stats" id="stats" style="display:none">
+  <div class="stat-pill">🎁 <span id="totalCount">0</span> regalos</div>
+  <div class="stat-pill">✅ <span id="spotsCount">0</span> lugares disponibles</div>
+  <div class="stat-pill">💚 <span id="takenCount">0</span> reservados</div>
+</div>
+
+<div class="filters" id="filters" style="display:none">
+  <button class="filter-btn active" onclick="setFilter('all', this)">Todos los Regalos</button>
+  <button class="filter-btn" onclick="setFilter('available', this)">Con Lugares ✅</button>
+  <button class="filter-btn" onclick="setFilter('reserved', this)">Completamente Reservados 🌿</button>
+</div>
+
+<div class="grid" id="grid">
+  <div class="message-box">
+    <div class="icon">🌿</div>
+    Cargando lista de regalos...
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="icon">🌱</div>
+    <h3>¡Regalo Reservado!</h3>
+    <p id="modalMsg"></p>
+    <button class="btn-close-modal" onclick="closeModal()">¡Genial! 🎉</button>
+  </div>
+</div>
+
+<script>
+  const STORAGE_KEY = 'matias-shower-reservations';
+  const SHEET_KEY   = 'matias-shower-sheet-url';
+
+  let gifts = [];
+  let reservations = {}; // { giftIndex: [name, ...] }
+  let currentFilter = 'all';
+  let saveTimer = null;
+
+  // ── Storage helpers ──────────────────────────────────────────────
+  async function loadReservations() {
+    try {
+      const r = await window.storage.get(STORAGE_KEY, true);
+      return r ? JSON.parse(r.value) : {};
+    } catch { return {}; }
+  }
+
+  async function saveReservations() {
+    showSaving(true);
+    try {
+      await window.storage.set(STORAGE_KEY, JSON.stringify(reservations), true);
+    } catch (e) { console.error('Error guardando:', e); }
+    finally { showSaving(false); }
+  }
+
+  async function loadSheetUrlFromStorage() {
+    try {
+      const r = await window.storage.get(SHEET_KEY, true);
+      return r ? r.value : null;
+    } catch { return null; }
+  }
+
+  async function saveSheetUrl(url) {
+    try { await window.storage.set(SHEET_KEY, url, true); } catch {}
+  }
+
+  function showSaving(on) {
+    document.getElementById('savingIndicator').classList.toggle('show', on);
+  }
+
+  function setLoading(on) {
+    document.getElementById('loadingBar').classList.toggle('active', on);
+  }
+
+  // ── Init ─────────────────────────────────────────────────────────
+  async function init() {
+    setLoading(true);
+    const [savedUrl, savedRes] = await Promise.all([loadSheetUrlFromStorage(), loadReservations()]);
+    reservations = savedRes;
+
+    if (savedUrl) {
+      document.getElementById('sheetUrl').value = savedUrl;
+      await fetchAndParseSheet(savedUrl);
+    } else {
+      loadDemoData();
+    }
+    setLoading(false);
+  }
+
+  // ── Sheet loading ─────────────────────────────────────────────────
+  async function loadSheet() {
+    const url = document.getElementById('sheetUrl').value.trim();
+    if (!url) { alert('Por favor pega el enlace de tu Google Sheet.'); return; }
+    const btn = document.querySelector('.btn-load');
+    btn.textContent = 'Cargando...'; btn.disabled = true;
+    setLoading(true);
+    await fetchAndParseSheet(url);
+    await saveSheetUrl(url);
+    setLoading(false);
+    btn.textContent = 'Cargar Regalos ✨'; btn.disabled = false;
+  }
+
+  async function fetchAndParseSheet(url) {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error();
+      const text = await res.text();
+      parseCSV(text);
+    } catch {
+      loadDemoData();
+    }
+  }
+
+  function parseCSV(text) {
+    const lines = text.trim().split('\n');
+    if (lines.length < 2) { alert('La hoja parece vacía.'); return; }
+    const headers = lines[0].split(',').map(h => h.trim().toLowerCase().replace(/"/g,''));
+    gifts = [];
+    for (let i = 1; i < lines.length; i++) {
+      const vals = splitCSVLine(lines[i]);
+      if (vals.every(v => !v.trim())) continue;
+      const obj = {};
+      headers.forEach((h, idx) => { obj[h] = (vals[idx]||'').replace(/^"|"$/g,'').trim(); });
+      obj.quantity = parseInt(obj.quantity) || 1;
+      gifts.push(obj);
+    }
+    if (!gifts.length) { alert('No se encontraron regalos.'); return; }
+    ensureReservationSlots();
+    showCatalogue();
+  }
+
+  function splitCSVLine(line) {
+    const res = []; let cur = '', inQ = false;
+    for (let ch of line) {
+      if (ch === '"') inQ = !inQ;
+      else if (ch === ',' && !inQ) { res.push(cur); cur = ''; }
+      else cur += ch;
+    }
+    res.push(cur); return res;
+  }
+
+  function loadDemoData() {
+    gifts = [
+      { name: 'Pañales (Paquete)', recommendation: 'Pampers Swaddlers son los más suaves para piel de recién nacido.', store_link: 'https://www.amazon.com', emoji: '🧷', quantity: 4, priority: 'Imprescindible' },
+      { name: 'Monitor de Bebé', recommendation: 'El Eufy SpaceView tiene gran alcance e imagen muy nítida.', store_link: 'https://www.amazon.com', emoji: '📹', quantity: 1, priority: 'Imprescindible' },
+      { name: 'Set de Cobijas Swaddle', recommendation: 'Aden + Anais son las más suaves que encontramos.', store_link: 'https://www.amazon.com', emoji: '🌿', quantity: 3, priority: 'Muy recomendado' },
+      { name: 'Silla Mecedora', recommendation: '¡El Babybjörn Bliss — a los bebés les encanta!', store_link: 'https://www.amazon.com', emoji: '🪑', quantity: 1, priority: 'Muy recomendado' },
+      { name: 'Toallitas Húmedas (Caja)', recommendation: 'WaterWipes son 99.9% agua, ideales para piel sensible.', store_link: 'https://www.amazon.com', emoji: '🧴', quantity: 4, priority: 'Imprescindible' },
+      { name: 'Máquina de Ruido Blanco', recommendation: '¡El Hatch Rest es increíble — se controla desde el celular!', store_link: 'https://www.amazon.com', emoji: '🔊', quantity: 1, priority: 'Muy recomendado' },
+    ];
+    ensureReservationSlots();
+    showCatalogue();
+  }
+
+  function ensureReservationSlots() {
+    gifts.forEach((_, i) => { if (!reservations[i]) reservations[i] = []; });
+  }
+
+  function showCatalogue() {
+    document.getElementById('sheetSetup').style.display = 'none';
+    document.getElementById('stats').style.display = 'flex';
+    document.getElementById('filters').style.display = 'flex';
+    renderGifts();
+  }
+
+  function spotsLeft(i) { return gifts[i].quantity - (reservations[i]||[]).length; }
+
+  function renderGifts() {
+    const grid = document.getElementById('grid');
+    let totalSpots = 0, takenSpots = 0;
+    gifts.forEach((g, i) => { totalSpots += g.quantity; takenSpots += (reservations[i]||[]).length; });
+    document.getElementById('totalCount').textContent = gifts.length;
+    document.getElementById('spotsCount').textContent = totalSpots - takenSpots;
+    document.getElementById('takenCount').textContent = takenSpots;
+
+    const filtered = gifts.filter((_, i) => {
+      if (currentFilter === 'available') return spotsLeft(i) > 0;
+      if (currentFilter === 'reserved') return spotsLeft(i) === 0;
+      return true;
+    });
+
+    if (!filtered.length) {
+      grid.innerHTML = `<div class="message-box"><div class="icon">🔍</div>No hay regalos en esta categoría.</div>`;
+      return;
+    }
+
+    grid.innerHTML = filtered.map(g => {
+      const i = gifts.indexOf(g);
+      const qty = g.quantity, taken = (reservations[i]||[]).length;
+      const left = qty - taken, full = left === 0;
+      const pct = qty > 1 ? Math.round((taken/qty)*100) : (taken ? 100 : 0);
+      const emoji = g.emoji || '🎁';
+      const showBar = qty > 1;
+      const priorityClass = (g.priority||'').toLowerCase().replace(/\s+/g,'-');
+
+      return `
+      <div class="card ${full?'fully-reserved':''}" id="card-${i}">
+        <div class="card-img">
+          <span>${emoji}</span>
+          ${full ? `<div class="fully-reserved-badge">🌿 Completamente Reservado</div>`
+                 : (qty > 1 ? `<div class="spots-badge">${left} lugar${left>1?'es':''} disponible${left>1?'s':''}</div>` : '')}
+          ${showBar ? `
+          <div class="qty-bar-wrap">
+            <div class="qty-label"><span>Reservados</span><span>${taken}/${qty}</span></div>
+            <div class="qty-bar-bg"><div class="qty-bar-fill ${full?'full':''}" style="width:${pct}%"></div></div>
+          </div>` : ''}
+        </div>
+        <div class="card-body">
+          <div class="card-name">${g.name||'Regalo'}</div>
+          ${g.priority ? `<div class="card-priority priority-${priorityClass}">
+            ${g.priority.toLowerCase()==='imprescindible'?'⭐':'👍'} ${g.priority}
+          </div>` : ''}
+          ${g.recommendation ? `<div class="card-rec"><span>✨ Tip: </span>${g.recommendation}</div>` : ''}
+        </div>
+        <div class="card-footer">
+          ${g.store_link ? `<a class="btn-store" href="${g.store_link}" target="_blank">🛍️ Ver en Tienda</a>` : ''}
+          ${taken > 0 ? `<div class="reservations-list">
+            ${(reservations[i]||[]).map(n=>`<div class="reservation-item"><div class="dot"></div>${n}</div>`).join('')}
+          </div>` : ''}
+          ${full
+            ? `<div class="fully-taken-msg">🌿 ¡Todos los lugares están tomados — gracias!</div>`
+            : `<div class="reserve-area">
+                <input type="text" id="name-${i}" placeholder="Tu nombre para reservar..." maxlength="50"/>
+                <button class="btn-reserve" onclick="reserve(${i})">Reservar${qty>1?' un Lugar':' este Regalo'} 🌱</button>
+              </div>`}
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  async function reserve(i) {
+    const input = document.getElementById(`name-${i}`);
+    const name = input.value.trim();
+    if (!name) { input.focus(); input.style.borderColor='#5a8040'; return; }
+    if (spotsLeft(i) <= 0) return;
+    if ((reservations[i]||[]).includes(name)) { alert(`¡${name} ya reservó este regalo!`); return; }
+
+    if (!reservations[i]) reservations[i] = [];
+    reservations[i].push(name);
+    renderGifts();
+
+    // Save persistently
+    await saveReservations();
+
+    const left = spotsLeft(i);
+    document.getElementById('modalMsg').textContent =
+      `¡Gracias, ${name}! 🎁 Reservaste "${gifts[i].name}" para el Baby Shower de Matías. ${left > 0
+        ? `¡Aún ${left===1?'queda':'quedan'} ${left} lugar${left>1?'es':''} disponible${left>1?'s':''}!`
+        : '¡Este regalo está completamente reservado!'} ¡Los papás estarán muy agradecidos!`;
+    document.getElementById('modal').classList.add('open');
+  }
+
+  function closeModal() { document.getElementById('modal').classList.remove('open'); }
+
+  function setFilter(f, btn) {
+    currentFilter = f;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderGifts();
+  }
+
+  document.getElementById('sheetUrl').addEventListener('keydown', e => { if(e.key==='Enter') loadSheet(); });
+
+  // Start
+  init();
+</script>
+</body>
+</html>
