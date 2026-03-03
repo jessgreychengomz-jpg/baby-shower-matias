@@ -244,7 +244,14 @@
     width: 100%; height: 190px;
     background: linear-gradient(135deg, #e4edd8, #ede8dc);
     display: flex; align-items: center; justify-content: center;
-    font-size: 64px; position: relative;
+    font-size: 64px; position: relative; overflow: hidden;
+  }
+  .card-img img {
+    width: 100%; height: 100%; object-fit: cover;
+    display: block;
+  }
+  .card-img .fallback-emoji {
+    font-size: 64px;
   }
   .qty-bar-wrap {
     position: absolute; bottom: 0; left: 0; right: 0;
@@ -399,7 +406,7 @@
       1. Abre tu Google Sheet → <code>Archivo</code> → <code>Compartir</code> → <code>Publicar en la web</code><br>
       2. Selecciona <code>Documento completo</code> y formato <code>Valores separados por comas (.csv)</code><br>
       3. Clic en <code>Publicar</code> y pega el link arriba<br><br>
-      <strong>Columnas requeridas:</strong> <code>name</code> · <code>priority</code> · <code>recommendation</code> · <code>store_link</code> · <code>quantity</code> · <code>emoji</code>
+      <strong>Columnas requeridas:</strong> <code>name</code> · <code>priority</code> · <code>recommendation</code> · <code>store_link</code> · <code>quantity</code> · <code>image</code> (URL de imagen)
     </div>
   </div>
 
@@ -709,7 +716,9 @@
 
       return `<div class="card ${full?'fully-reserved':''}" id="card-${i}">
         <div class="card-img">
-          <span>${emoji}</span>
+          ${g.image
+            ? `<img src="${g.image}" alt="${g.name||'Regalo'}" onerror="this.parentElement.innerHTML='<span class=\'fallback-emoji\'>🎁</span>'" />`
+            : `<span class="fallback-emoji">🎁</span>`}
           ${full ? `<div class="fully-reserved-badge">🌿 Completamente Reservado</div>`
                  : qty > 1 ? `<div class="spots-badge">${left} lugar${left>1?'es':''} disponible${left>1?'s':''}</div>` : ''}
           ${showBar ? `<div class="qty-bar-wrap">
