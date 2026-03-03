@@ -26,214 +26,14 @@
     pointer-events: none; z-index: 0;
   }
 
-  header {
-    text-align: center; padding: 48px 20px 32px;
-    position: relative; z-index: 1;
-  }
-  .header-badge {
-    display: inline-block; background: white;
-    border: 2px solid #a8c490; border-radius: 50px;
-    padding: 6px 20px; font-size: 12px; color: #6a9a50;
-    letter-spacing: 2px; text-transform: uppercase;
-    font-weight: 700; margin-bottom: 16px;
-  }
-  header h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    color: #5a8040; line-height: 1.2; margin-bottom: 8px;
-  }
-  header p { color: #8a9a7a; font-size: 15px; max-width: 460px; margin: 0 auto 28px; }
-  .decorations { font-size: 28px; margin-bottom: 8px; }
+  /* ── SHARED ── */
+  .hidden { display: none !important; }
 
-  /* Sheet setup */
-  .sheet-setup {
-    background: white; border: 2px dashed #a8c490;
-    border-radius: 20px; padding: 28px;
-    max-width: 600px; margin: 0 auto 40px;
-    text-align: center; position: relative; z-index: 1;
-  }
-  .sheet-setup h3 { color: #5a8040; margin-bottom: 8px; font-size: 16px; }
-  .sheet-setup p { font-size: 13px; color: #8a9a7a; margin-bottom: 16px; line-height: 1.6; }
-  .sheet-setup .input-row { display: flex; gap: 10px; flex-wrap: wrap; }
-  .sheet-setup input {
-    flex: 1; min-width: 200px; border: 2px solid #a8c490;
-    border-radius: 12px; padding: 10px 16px;
-    font-family: inherit; font-size: 13px; color: #4a5240;
-    outline: none; transition: border-color .2s;
-  }
-  .sheet-setup input:focus { border-color: #6a9a50; }
-  .btn-load {
-    background: linear-gradient(135deg, #8ec46a, #5a8040);
-    color: white; border: none; border-radius: 12px;
-    padding: 10px 22px; font-family: inherit; font-size: 14px;
-    font-weight: 700; cursor: pointer; transition: opacity .2s, transform .1s; white-space: nowrap;
-  }
-  .btn-load:hover { opacity: .9; transform: translateY(-1px); }
-  .sheet-note {
-    margin-top: 14px; font-size: 12px; color: #9aaa8a;
-    line-height: 1.7; text-align: left;
-    background: #f5f0e8; border-radius: 10px; padding: 10px 14px;
-  }
-  .sheet-note code {
-    background: #e4edd8; color: #5a8040;
-    padding: 1px 6px; border-radius: 4px; font-size: 11px;
-  }
-
-  /* Stats */
-  .stats {
-    display: flex; gap: 16px; justify-content: center;
-    flex-wrap: wrap; margin: 0 auto 32px;
-    max-width: 700px; padding: 0 20px;
-    position: relative; z-index: 1;
-  }
-  .stat-pill {
-    background: white; border: 2px solid #a8c490;
-    border-radius: 50px; padding: 8px 20px;
-    font-size: 13px; font-weight: 600; color: #5a8040;
-    display: flex; align-items: center; gap: 6px;
-    box-shadow: 0 2px 8px rgba(90,128,64,.1);
-  }
-
-  /* Filters */
-  .filters {
-    display: flex; gap: 10px; justify-content: center;
-    flex-wrap: wrap; padding: 0 20px; margin-bottom: 32px;
-    position: relative; z-index: 1;
-  }
-  .filter-btn {
-    background: white; border: 2px solid #a8c490;
-    border-radius: 50px; padding: 8px 20px;
-    font-family: inherit; font-size: 13px; font-weight: 600;
-    color: #8a9a7a; cursor: pointer; transition: all .2s;
-  }
-  .filter-btn.active, .filter-btn:hover {
-    background: linear-gradient(135deg, #8ec46a, #5a8040);
-    border-color: transparent; color: white;
-  }
-
-  /* Grid */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-    gap: 24px; max-width: 1100px;
-    margin: 0 auto; padding: 0 20px 60px;
-    position: relative; z-index: 1;
-  }
-
-  /* Card */
-  .card {
-    background: white; border-radius: 24px; overflow: hidden;
-    box-shadow: 0 4px 20px rgba(90,128,64,.1);
-    transition: transform .25s, box-shadow .25s;
-    display: flex; flex-direction: column;
-    border: 2px solid transparent;
-  }
-  .card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(90,128,64,.18); }
-  .card.fully-reserved { border-color: #a8c490; opacity: .82; }
-
-  .card-img {
-    width: 100%; height: 190px;
-    background: linear-gradient(135deg, #e4edd8, #ede8dc);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 64px; position: relative;
-  }
-
-  .qty-bar-wrap {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    background: rgba(255,255,255,.75); padding: 8px 14px 10px;
-    backdrop-filter: blur(4px);
-  }
-  .qty-label {
-    display: flex; justify-content: space-between;
-    font-size: 11px; font-weight: 700; color: #5a8040; margin-bottom: 5px;
-  }
-  .qty-bar-bg { height: 7px; background: #e4edd8; border-radius: 99px; overflow: hidden; }
-  .qty-bar-fill {
-    height: 100%; border-radius: 99px;
-    background: linear-gradient(90deg, #8ec46a, #5a8040);
-    transition: width .4s ease;
-  }
-  .qty-bar-fill.full { background: linear-gradient(90deg, #c4a86a, #806040); }
-
-  .fully-reserved-badge {
-    position: absolute; top: 12px; right: 12px;
-    background: linear-gradient(135deg, #c4a86a, #806040);
-    color: white; font-size: 11px; font-weight: 700;
-    padding: 4px 12px; border-radius: 50px; letter-spacing: .5px;
-  }
-  .spots-badge {
-    position: absolute; top: 12px; right: 12px;
-    background: linear-gradient(135deg, #8ec46a, #5a8040);
-    color: white; font-size: 11px; font-weight: 700;
-    padding: 4px 12px; border-radius: 50px;
-  }
-
-  .card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
-  .card-name { font-size: 17px; font-weight: 700; color: #4a5240; line-height: 1.3; }
-
-  .card-priority {
-    display: inline-flex; align-items: center; gap: 5px;
-    font-size: 12px; font-weight: 700; padding: 4px 12px;
-    border-radius: 50px; width: fit-content;
-  }
-  .card-priority.priority-imprescindible { background: #fdecea; color: #c0392b; }
-  .card-priority.priority-muy-recomendado { background: #eafaf1; color: #1e8449; }
-
-  .card-rec {
-    background: #f0f5e8; border-left: 3px solid #a8c490;
-    border-radius: 0 8px 8px 0; padding: 8px 12px;
-    font-size: 12px; color: #5a8040; font-style: italic; line-height: 1.5;
-  }
-  .card-rec span { font-weight: 700; font-style: normal; }
-
-  .card-footer { padding: 0 20px 20px; display: flex; flex-direction: column; gap: 10px; }
-
-  .btn-store {
-    display: block; text-align: center;
-    background: #f0f5e8; color: #5a8040;
-    border: 2px solid #a8c490; border-radius: 12px;
-    padding: 9px; font-family: inherit; font-size: 13px;
-    font-weight: 700; text-decoration: none; transition: all .2s;
-  }
-  .btn-store:hover { background: #e4edd8; }
-
-  .reservations-list { display: flex; flex-direction: column; gap: 5px; }
-  .reservation-item {
-    display: flex; align-items: center; gap: 8px;
-    font-size: 12px; color: #6a9a50; font-weight: 600;
-    background: #f0f5e8; border-radius: 8px; padding: 6px 10px;
-  }
-  .reservation-item .dot { width: 7px; height: 7px; border-radius: 50%; background: #8ec46a; flex-shrink: 0; }
-
-  .reserve-area { display: flex; flex-direction: column; gap: 8px; }
-  .reserve-area input {
-    border: 2px solid #a8c490; border-radius: 12px;
-    padding: 9px 14px; font-family: inherit; font-size: 13px;
-    color: #4a5240; outline: none; transition: border-color .2s; width: 100%;
-  }
-  .reserve-area input:focus { border-color: #5a8040; }
-
-  .btn-reserve {
-    width: 100%;
-    background: linear-gradient(135deg, #8ec46a, #5a8040);
-    color: white; border: none; border-radius: 12px;
-    padding: 10px; font-family: inherit; font-size: 14px;
-    font-weight: 700; cursor: pointer; transition: opacity .2s, transform .1s;
-  }
-  .btn-reserve:hover { opacity: .9; transform: translateY(-1px); }
-  .btn-reserve:disabled { opacity: .5; cursor: not-allowed; transform: none; }
-
-  .fully-taken-msg {
-    text-align: center; font-size: 13px;
-    color: #9a7a50; font-weight: 600; padding: 6px 0;
-  }
-
-  /* Loading overlay */
   .loading-bar {
     position: fixed; top: 0; left: 0; right: 0; height: 4px;
     background: linear-gradient(90deg, #8ec46a, #5a8040);
     z-index: 200; transform: scaleX(0); transform-origin: left;
-    transition: transform .3s ease; border-radius: 0 4px 4px 0;
+    transition: transform .4s ease;
   }
   .loading-bar.active { transform: scaleX(1); }
 
@@ -254,11 +54,281 @@
   }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  .message-box {
-    text-align: center; padding: 60px 20px;
-    color: #8a9a7a; font-size: 15px; grid-column: 1 / -1;
+  /* ── ADMIN LOGIN ── */
+  #adminLoginView {
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh; padding: 20px; position: relative; z-index: 1;
   }
+  .login-card {
+    background: white; border-radius: 24px; padding: 40px;
+    max-width: 400px; width: 100%; text-align: center;
+    box-shadow: 0 8px 32px rgba(90,128,64,.15);
+    border: 2px solid #e4edd8;
+  }
+  .login-card .icon { font-size: 48px; margin-bottom: 12px; }
+  .login-card h2 {
+    font-family: 'Playfair Display', serif;
+    color: #5a8040; font-size: 22px; margin-bottom: 6px;
+  }
+  .login-card p { color: #8a9a7a; font-size: 13px; margin-bottom: 24px; }
+  .login-card input {
+    width: 100%; border: 2px solid #a8c490; border-radius: 12px;
+    padding: 11px 16px; font-family: inherit; font-size: 14px;
+    color: #4a5240; outline: none; transition: border-color .2s;
+    margin-bottom: 12px; text-align: center; letter-spacing: 3px;
+  }
+  .login-card input:focus { border-color: #5a8040; }
+  .login-error { color: #c0392b; font-size: 13px; margin-bottom: 10px; display: none; }
+
+  /* ── ADMIN PANEL ── */
+  #adminView {
+    position: relative; z-index: 1; padding: 40px 20px 60px;
+  }
+  .admin-header {
+    max-width: 700px; margin: 0 auto 32px;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  }
+  .admin-header h2 {
+    font-family: 'Playfair Display', serif;
+    color: #5a8040; font-size: 26px;
+  }
+  .admin-header p { color: #8a9a7a; font-size: 13px; margin-top: 4px; }
+
+  .admin-card {
+    background: white; border-radius: 20px;
+    padding: 28px; max-width: 700px; margin: 0 auto 24px;
+    box-shadow: 0 4px 20px rgba(90,128,64,.1);
+    border: 2px solid #e4edd8;
+  }
+  .admin-card h3 { color: #5a8040; font-size: 16px; margin-bottom: 6px; }
+  .admin-card .subtitle { color: #8a9a7a; font-size: 13px; margin-bottom: 18px; line-height: 1.6; }
+
+  .input-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .input-row input {
+    flex: 1; min-width: 200px; border: 2px solid #a8c490;
+    border-radius: 12px; padding: 10px 16px;
+    font-family: inherit; font-size: 13px; color: #4a5240;
+    outline: none; transition: border-color .2s;
+  }
+  .input-row input:focus { border-color: #5a8040; }
+
+  .sheet-note {
+    margin-top: 14px; font-size: 12px; color: #9aaa8a;
+    line-height: 1.8; background: #f5f0e8;
+    border-radius: 10px; padding: 12px 16px;
+  }
+  .sheet-note code {
+    background: #e4edd8; color: #5a8040;
+    padding: 1px 6px; border-radius: 4px; font-size: 11px;
+  }
+
+  .status-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 16px; border-radius: 50px; font-size: 13px; font-weight: 600;
+    margin-top: 14px;
+  }
+  .status-pill.ok { background: #eafaf1; color: #1e8449; border: 2px solid #a8d8b0; }
+  .status-pill.warn { background: #fef9e7; color: #b7770d; border: 2px solid #f0d080; }
+  .status-pill.err { background: #fdecea; color: #c0392b; border: 2px solid #f0a8a0; }
+
+  .reservations-table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 13px; }
+  .reservations-table th {
+    text-align: left; padding: 8px 12px;
+    background: #f0f5e8; color: #5a8040; font-weight: 700;
+    border-radius: 8px;
+  }
+  .reservations-table td { padding: 8px 12px; border-bottom: 1px solid #f0f5e8; color: #4a5240; }
+  .reservations-table tr:last-child td { border-bottom: none; }
+  .tag { background: #e4edd8; color: #5a8040; border-radius: 50px; padding: 2px 10px; font-size: 11px; font-weight: 700; }
+
+  .btn { 
+    background: linear-gradient(135deg, #8ec46a, #5a8040);
+    color: white; border: none; border-radius: 12px;
+    padding: 10px 22px; font-family: inherit; font-size: 14px;
+    font-weight: 700; cursor: pointer; transition: opacity .2s, transform .1s; white-space: nowrap;
+  }
+  .btn:hover { opacity: .9; transform: translateY(-1px); }
+  .btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+  .btn-outline {
+    background: white; color: #5a8040;
+    border: 2px solid #a8c490; border-radius: 12px;
+    padding: 8px 18px; font-family: inherit; font-size: 13px;
+    font-weight: 700; cursor: pointer; transition: all .2s;
+  }
+  .btn-outline:hover { background: #f0f5e8; }
+  .btn-danger {
+    background: white; color: #c0392b;
+    border: 2px solid #f0a8a0; border-radius: 12px;
+    padding: 8px 18px; font-family: inherit; font-size: 13px;
+    font-weight: 700; cursor: pointer; transition: all .2s;
+  }
+  .btn-danger:hover { background: #fdecea; }
+
+  /* ── PUBLIC VIEW ── */
+  header {
+    text-align: center; padding: 48px 20px 32px;
+    position: relative; z-index: 1;
+  }
+  .header-badge {
+    display: inline-block; background: white;
+    border: 2px solid #a8c490; border-radius: 50px;
+    padding: 6px 20px; font-size: 12px; color: #6a9a50;
+    letter-spacing: 2px; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 16px;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: #5a8040; line-height: 1.2; margin-bottom: 8px;
+  }
+  header p { color: #8a9a7a; font-size: 15px; max-width: 460px; margin: 0 auto; }
+  .decorations { font-size: 28px; margin-bottom: 8px; }
+
+  .no-sheet-msg {
+    text-align: center; padding: 60px 20px;
+    position: relative; z-index: 1;
+  }
+  .no-sheet-msg .icon { font-size: 56px; margin-bottom: 16px; }
+  .no-sheet-msg h3 { font-family: 'Playfair Display', serif; color: #5a8040; font-size: 22px; margin-bottom: 8px; }
+  .no-sheet-msg p { color: #8a9a7a; font-size: 14px; }
+
+  .stats {
+    display: flex; gap: 16px; justify-content: center;
+    flex-wrap: wrap; margin: 32px auto 24px;
+    max-width: 700px; padding: 0 20px;
+    position: relative; z-index: 1;
+  }
+  .stat-pill {
+    background: white; border: 2px solid #a8c490;
+    border-radius: 50px; padding: 8px 20px;
+    font-size: 13px; font-weight: 600; color: #5a8040;
+    display: flex; align-items: center; gap: 6px;
+    box-shadow: 0 2px 8px rgba(90,128,64,.1);
+  }
+
+  .filters {
+    display: flex; gap: 10px; justify-content: center;
+    flex-wrap: wrap; padding: 0 20px; margin-bottom: 32px;
+    position: relative; z-index: 1;
+  }
+  .filter-btn {
+    background: white; border: 2px solid #a8c490;
+    border-radius: 50px; padding: 8px 20px;
+    font-family: inherit; font-size: 13px; font-weight: 600;
+    color: #8a9a7a; cursor: pointer; transition: all .2s;
+  }
+  .filter-btn.active, .filter-btn:hover {
+    background: linear-gradient(135deg, #8ec46a, #5a8040);
+    border-color: transparent; color: white;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 24px; max-width: 1100px;
+    margin: 0 auto; padding: 0 20px 60px;
+    position: relative; z-index: 1;
+  }
+
+  .card {
+    background: white; border-radius: 24px; overflow: hidden;
+    box-shadow: 0 4px 20px rgba(90,128,64,.1);
+    transition: transform .25s, box-shadow .25s;
+    display: flex; flex-direction: column;
+    border: 2px solid transparent;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(90,128,64,.18); }
+  .card.fully-reserved { border-color: #a8c490; opacity: .82; }
+
+  .card-img {
+    width: 100%; height: 190px;
+    background: linear-gradient(135deg, #e4edd8, #ede8dc);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 64px; position: relative;
+  }
+  .qty-bar-wrap {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: rgba(255,255,255,.75); padding: 8px 14px 10px;
+    backdrop-filter: blur(4px);
+  }
+  .qty-label { display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; color: #5a8040; margin-bottom: 5px; }
+  .qty-bar-bg { height: 7px; background: #e4edd8; border-radius: 99px; overflow: hidden; }
+  .qty-bar-fill { height: 100%; border-radius: 99px; background: linear-gradient(90deg, #8ec46a, #5a8040); transition: width .4s ease; }
+  .qty-bar-fill.full { background: linear-gradient(90deg, #c4a86a, #806040); }
+
+  .fully-reserved-badge {
+    position: absolute; top: 12px; right: 12px;
+    background: linear-gradient(135deg, #c4a86a, #806040);
+    color: white; font-size: 11px; font-weight: 700;
+    padding: 4px 12px; border-radius: 50px;
+  }
+  .spots-badge {
+    position: absolute; top: 12px; right: 12px;
+    background: linear-gradient(135deg, #8ec46a, #5a8040);
+    color: white; font-size: 11px; font-weight: 700;
+    padding: 4px 12px; border-radius: 50px;
+  }
+
+  .card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+  .card-name { font-size: 17px; font-weight: 700; color: #4a5240; line-height: 1.3; }
+  .card-priority {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 12px; font-weight: 700; padding: 4px 12px;
+    border-radius: 50px; width: fit-content;
+  }
+  .card-priority.priority-imprescindible { background: #fdecea; color: #c0392b; }
+  .card-priority.priority-muy-recomendado { background: #eafaf1; color: #1e8449; }
+  .card-rec {
+    background: #f0f5e8; border-left: 3px solid #a8c490;
+    border-radius: 0 8px 8px 0; padding: 8px 12px;
+    font-size: 12px; color: #5a8040; font-style: italic; line-height: 1.5;
+  }
+  .card-rec span { font-weight: 700; font-style: normal; }
+
+  .card-footer { padding: 0 20px 20px; display: flex; flex-direction: column; gap: 10px; }
+  .btn-store {
+    display: block; text-align: center; background: #f0f5e8; color: #5a8040;
+    border: 2px solid #a8c490; border-radius: 12px; padding: 9px;
+    font-family: inherit; font-size: 13px; font-weight: 700; text-decoration: none; transition: all .2s;
+  }
+  .btn-store:hover { background: #e4edd8; }
+  .reservations-list { display: flex; flex-direction: column; gap: 5px; }
+  .reservation-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; color: #6a9a50; font-weight: 600;
+    background: #f0f5e8; border-radius: 8px; padding: 6px 10px;
+  }
+  .reservation-item .dot { width: 7px; height: 7px; border-radius: 50%; background: #8ec46a; flex-shrink: 0; }
+  .reserve-area { display: flex; flex-direction: column; gap: 8px; }
+  .reserve-area input {
+    border: 2px solid #a8c490; border-radius: 12px; padding: 9px 14px;
+    font-family: inherit; font-size: 13px; color: #4a5240;
+    outline: none; transition: border-color .2s; width: 100%;
+  }
+  .reserve-area input:focus { border-color: #5a8040; }
+  .btn-reserve {
+    width: 100%; background: linear-gradient(135deg, #8ec46a, #5a8040);
+    color: white; border: none; border-radius: 12px; padding: 10px;
+    font-family: inherit; font-size: 14px; font-weight: 700;
+    cursor: pointer; transition: opacity .2s, transform .1s;
+  }
+  .btn-reserve:hover { opacity: .9; transform: translateY(-1px); }
+  .fully-taken-msg { text-align: center; font-size: 13px; color: #9a7a50; font-weight: 600; padding: 6px 0; }
+
+  .message-box { text-align: center; padding: 60px 20px; color: #8a9a7a; font-size: 15px; grid-column: 1 / -1; }
   .message-box .icon { font-size: 48px; margin-bottom: 12px; }
+
+  /* Admin link at bottom */
+  .admin-link {
+    text-align: center; padding: 0 20px 40px;
+    position: relative; z-index: 1;
+  }
+  .admin-link button {
+    background: none; border: none; color: #c0b8a8;
+    font-family: inherit; font-size: 12px; cursor: pointer;
+    text-decoration: underline; opacity: .6;
+  }
+  .admin-link button:hover { opacity: 1; }
 
   /* Modal */
   .modal-overlay {
@@ -287,52 +357,116 @@
 <body>
 
 <div class="loading-bar" id="loadingBar"></div>
-<div class="saving-indicator" id="savingIndicator">
-  <div class="spinner"></div> Guardando...
-</div>
+<div class="saving-indicator" id="savingIndicator"><div class="spinner"></div> Guardando...</div>
 
-<header>
-  <div class="decorations">🌿 🍼 🌱</div>
-  <div class="header-badge">Baby Shower · Matías</div>
-  <h1>¡Bienvenido, Matías!</h1>
-  <p>Explora la lista de regalos y reserva el que quieras dar. Cada regalo es una muestra de amor para el bebé 💚</p>
-</header>
-
-<div class="sheet-setup" id="sheetSetup">
-  <h3>📋 Conecta tu Google Sheet</h3>
-  <p>Pega el enlace <strong>publicado en CSV</strong> de tu Google Sheets para cargar la lista de regalos.</p>
-  <div class="input-row">
-    <input type="text" id="sheetUrl" placeholder="https://docs.google.com/spreadsheets/d/.../pub?output=csv" />
-    <button class="btn-load" onclick="loadSheet()">Cargar Regalos ✨</button>
-  </div>
-  <div class="sheet-note">
-    <strong>Cómo obtener el enlace:</strong><br>
-    1. Abre tu Google Sheet → <code>Archivo</code> → <code>Compartir</code> → <code>Publicar en la web</code><br>
-    2. Selecciona <code>Documento completo</code> y formato <code>Valores separados por comas (.csv)</code><br>
-    3. Haz clic en <code>Publicar</code> y pega el enlace arriba<br><br>
-    <strong>Columnas requeridas:</strong> <code>name</code> · <code>priority</code> · <code>recommendation</code> · <code>store_link</code> · <code>quantity</code> · <code>emoji</code> (opcional)
+<!-- ═══════════════════════════════════════════
+     VIEW 1: ADMIN LOGIN
+════════════════════════════════════════════ -->
+<div id="adminLoginView" class="hidden">
+  <div class="login-card">
+    <div class="icon">🔐</div>
+    <h2>Panel de Administración</h2>
+    <p>Ingresa la clave de acceso para continuar</p>
+    <div class="login-error" id="loginError">❌ Clave incorrecta, intenta de nuevo</div>
+    <input type="password" id="adminPassInput" placeholder="••••••••" onkeydown="if(event.key==='Enter') checkPass()" />
+    <button class="btn" style="width:100%" onclick="checkPass()">Entrar al Panel 🌿</button>
   </div>
 </div>
 
-<div class="stats" id="stats" style="display:none">
-  <div class="stat-pill">🎁 <span id="totalCount">0</span> regalos</div>
-  <div class="stat-pill">✅ <span id="spotsCount">0</span> lugares disponibles</div>
-  <div class="stat-pill">💚 <span id="takenCount">0</span> reservados</div>
-</div>
+<!-- ═══════════════════════════════════════════
+     VIEW 2: ADMIN PANEL
+════════════════════════════════════════════ -->
+<div id="adminView" class="hidden">
+  <div class="admin-header">
+    <div>
+      <h2>🌿 Panel de Admin — Baby Shower Matías</h2>
+      <p>Solo tú ves esta página. Los invitados solo ven el catálogo de regalos.</p>
+    </div>
+    <button class="btn-outline" onclick="goToPublic()">👀 Ver como invitado</button>
+  </div>
 
-<div class="filters" id="filters" style="display:none">
-  <button class="filter-btn active" onclick="setFilter('all', this)">Todos los Regalos</button>
-  <button class="filter-btn" onclick="setFilter('available', this)">Con Lugares ✅</button>
-  <button class="filter-btn" onclick="setFilter('reserved', this)">Completamente Reservados 🌿</button>
-</div>
+  <!-- Google Sheet config -->
+  <div class="admin-card">
+    <h3>📋 Google Sheet de Regalos</h3>
+    <p class="subtitle">Pega aquí el link publicado en CSV de tu Google Sheet. Cada vez que actualices la hoja, los cambios se reflejarán automáticamente para los invitados.</p>
+    <div class="input-row">
+      <input type="text" id="adminSheetUrl" placeholder="https://docs.google.com/spreadsheets/d/.../pub?output=csv" />
+      <button class="btn" id="btnSaveSheet" onclick="adminSaveSheet()">Guardar y Cargar ✨</button>
+    </div>
+    <div id="sheetStatus"></div>
+    <div class="sheet-note">
+      <strong>Cómo obtener el link:</strong><br>
+      1. Abre tu Google Sheet → <code>Archivo</code> → <code>Compartir</code> → <code>Publicar en la web</code><br>
+      2. Selecciona <code>Documento completo</code> y formato <code>Valores separados por comas (.csv)</code><br>
+      3. Clic en <code>Publicar</code> y pega el link arriba<br><br>
+      <strong>Columnas requeridas:</strong> <code>name</code> · <code>priority</code> · <code>recommendation</code> · <code>store_link</code> · <code>quantity</code> · <code>emoji</code>
+    </div>
+  </div>
 
-<div class="grid" id="grid">
-  <div class="message-box">
-    <div class="icon">🌿</div>
-    Cargando lista de regalos...
+  <!-- Reservations summary -->
+  <div class="admin-card">
+    <h3>📊 Resumen de Reservas</h3>
+    <p class="subtitle">Todas las reservas que han hecho los invitados hasta ahora.</p>
+    <div id="adminReservationsList"></div>
+    <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap">
+      <button class="btn-outline" onclick="refreshAdminReservations()">🔄 Actualizar</button>
+      <button class="btn-danger" onclick="clearAllReservations()">🗑️ Borrar todas las reservas</button>
+    </div>
+  </div>
+
+  <!-- Change password -->
+  <div class="admin-card">
+    <h3>🔑 Cambiar Clave de Acceso</h3>
+    <p class="subtitle">La clave actual por defecto es <code>matias2025</code>. Cámbiala para mayor seguridad.</p>
+    <div class="input-row">
+      <input type="password" id="newPassInput" placeholder="Nueva clave..." />
+      <button class="btn" onclick="changePassword()">Guardar Clave</button>
+    </div>
+    <div id="passStatus" style="margin-top:10px; font-size:13px; color:#5a8040;"></div>
+  </div>
+
+  <div style="text-align:center; margin-top:8px">
+    <button class="btn-outline" onclick="logout()">Cerrar sesión</button>
   </div>
 </div>
 
+<!-- ═══════════════════════════════════════════
+     VIEW 3: PUBLIC CATALOGUE
+════════════════════════════════════════════ -->
+<div id="publicView" class="hidden">
+  <header>
+    <div class="decorations">🌿 🍼 🌱</div>
+    <div class="header-badge">Baby Shower · Matías</div>
+    <h1>¡Bienvenido, Matías!</h1>
+    <p>Explora la lista de regalos y reserva el que quieras dar. Cada regalo es una muestra de amor 💚</p>
+  </header>
+
+  <div id="noSheetMsg" class="no-sheet-msg hidden">
+    <div class="icon">🌱</div>
+    <h3>Lista de regalos próximamente</h3>
+    <p>Estamos preparando la lista. ¡Vuelve pronto!</p>
+  </div>
+
+  <div id="catalogueContent" class="hidden">
+    <div class="stats">
+      <div class="stat-pill">🎁 <span id="totalCount">0</span> regalos</div>
+      <div class="stat-pill">✅ <span id="spotsCount">0</span> lugares disponibles</div>
+      <div class="stat-pill">💚 <span id="takenCount">0</span> reservados</div>
+    </div>
+    <div class="filters">
+      <button class="filter-btn active" onclick="setFilter('all',this)">Todos los Regalos</button>
+      <button class="filter-btn" onclick="setFilter('available',this)">Con Lugares ✅</button>
+      <button class="filter-btn" onclick="setFilter('reserved',this)">Completamente Reservados 🌿</button>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+
+  <div class="admin-link">
+    <button onclick="showAdminLogin()">Administrar</button>
+  </div>
+</div>
+
+<!-- Modal -->
 <div class="modal-overlay" id="modal">
   <div class="modal">
     <div class="icon">🌱</div>
@@ -343,107 +477,192 @@
 </div>
 
 <script>
-  const STORAGE_KEY = 'matias-shower-reservations';
-  const SHEET_KEY   = 'matias-shower-sheet-url';
+  // ── Keys ─────────────────────────────────────────────────────────
+  const STORAGE_RES   = 'matias-reservations';
+  const STORAGE_SHEET = 'matias-sheet-url';
+  const STORAGE_PASS  = 'matias-admin-pass';
+  const DEFAULT_PASS  = 'matias2025';
 
   let gifts = [];
-  let reservations = {}; // { giftIndex: [name, ...] }
+  let reservations = {};
   let currentFilter = 'all';
-  let saveTimer = null;
 
-  // ── Storage helpers ──────────────────────────────────────────────
-  async function loadReservations() {
-    try {
-      const r = await window.storage.get(STORAGE_KEY, true);
-      return r ? JSON.parse(r.value) : {};
-    } catch { return {}; }
+  // ── Storage helpers ───────────────────────────────────────────────
+  async function sGet(key) {
+    try { const r = await window.storage.get(key, true); return r ? r.value : null; }
+    catch { return null; }
+  }
+  async function sSet(key, val) {
+    try { await window.storage.set(key, val, true); } catch(e) { console.error(e); }
+  }
+  async function sDel(key) {
+    try { await window.storage.delete(key, true); } catch {}
   }
 
-  async function saveReservations() {
-    showSaving(true);
-    try {
-      await window.storage.set(STORAGE_KEY, JSON.stringify(reservations), true);
-    } catch (e) { console.error('Error guardando:', e); }
-    finally { showSaving(false); }
-  }
+  function showSaving(on) { document.getElementById('savingIndicator').classList.toggle('show', on); }
+  function setLoading(on) { document.getElementById('loadingBar').classList.toggle('active', on); }
 
-  async function loadSheetUrlFromStorage() {
-    try {
-      const r = await window.storage.get(SHEET_KEY, true);
-      return r ? r.value : null;
-    } catch { return null; }
-  }
-
-  async function saveSheetUrl(url) {
-    try { await window.storage.set(SHEET_KEY, url, true); } catch {}
-  }
-
-  function showSaving(on) {
-    document.getElementById('savingIndicator').classList.toggle('show', on);
-  }
-
-  function setLoading(on) {
-    document.getElementById('loadingBar').classList.toggle('active', on);
+  function showView(id) {
+    ['adminLoginView','adminView','publicView'].forEach(v =>
+      document.getElementById(v).classList.toggle('hidden', v !== id));
   }
 
   // ── Init ─────────────────────────────────────────────────────────
   async function init() {
     setLoading(true);
-    const [savedUrl, savedRes] = await Promise.all([loadSheetUrlFromStorage(), loadReservations()]);
-    reservations = savedRes;
+    const [savedUrl, savedRes] = await Promise.all([sGet(STORAGE_SHEET), sGet(STORAGE_RES)]);
+    reservations = savedRes ? JSON.parse(savedRes) : {};
 
     if (savedUrl) {
-      document.getElementById('sheetUrl').value = savedUrl;
-      await fetchAndParseSheet(savedUrl);
-    } else {
-      loadDemoData();
+      document.getElementById('adminSheetUrl').value = savedUrl;
+      await fetchAndParseSheet(savedUrl, false);
     }
+
     setLoading(false);
+    showView('publicView');
+
+    if (!savedUrl || !gifts.length) {
+      document.getElementById('noSheetMsg').classList.remove('hidden');
+      document.getElementById('catalogueContent').classList.add('hidden');
+    } else {
+      document.getElementById('noSheetMsg').classList.add('hidden');
+      document.getElementById('catalogueContent').classList.remove('hidden');
+      ensureSlots();
+      renderGifts();
+    }
   }
 
-  // ── Sheet loading ─────────────────────────────────────────────────
-  async function loadSheet() {
-    const url = document.getElementById('sheetUrl').value.trim();
-    if (!url) { alert('Por favor pega el enlace de tu Google Sheet.'); return; }
-    const btn = document.querySelector('.btn-load');
+  // ── Admin auth ────────────────────────────────────────────────────
+  function showAdminLogin() { showView('adminLoginView'); }
+
+  async function checkPass() {
+    const input = document.getElementById('adminPassInput').value;
+    const storedPass = await sGet(STORAGE_PASS) || DEFAULT_PASS;
+    if (input === storedPass) {
+      document.getElementById('adminPassInput').value = '';
+      document.getElementById('loginError').style.display = 'none';
+      await loadAdminPanel();
+      showView('adminView');
+    } else {
+      document.getElementById('loginError').style.display = 'block';
+    }
+  }
+
+  async function changePassword() {
+    const np = document.getElementById('newPassInput').value.trim();
+    if (!np || np.length < 4) { document.getElementById('passStatus').textContent = '⚠️ Mínimo 4 caracteres.'; return; }
+    await sSet(STORAGE_PASS, np);
+    document.getElementById('newPassInput').value = '';
+    document.getElementById('passStatus').textContent = '✅ Clave actualizada correctamente.';
+  }
+
+  function logout() { showView('publicView'); }
+  function goToPublic() { showView('publicView'); }
+
+  // ── Admin panel ───────────────────────────────────────────────────
+  async function loadAdminPanel() {
+    const url = await sGet(STORAGE_SHEET);
+    if (url) {
+      document.getElementById('adminSheetUrl').value = url;
+      document.getElementById('sheetStatus').innerHTML =
+        `<div class="status-pill ok">✅ Google Sheet conectado</div>`;
+    } else {
+      document.getElementById('sheetStatus').innerHTML =
+        `<div class="status-pill warn">⚠️ Aún no hay Google Sheet configurado</div>`;
+    }
+    refreshAdminReservations();
+  }
+
+  async function adminSaveSheet() {
+    const url = document.getElementById('adminSheetUrl').value.trim();
+    if (!url) { alert('Por favor pega el link de tu Google Sheet.'); return; }
+    const btn = document.getElementById('btnSaveSheet');
     btn.textContent = 'Cargando...'; btn.disabled = true;
     setLoading(true);
-    await fetchAndParseSheet(url);
-    await saveSheetUrl(url);
+    const ok = await fetchAndParseSheet(url, true);
+    if (ok) {
+      await sSet(STORAGE_SHEET, url);
+      document.getElementById('sheetStatus').innerHTML =
+        `<div class="status-pill ok">✅ Google Sheet conectado — ${gifts.length} regalos cargados</div>`;
+      ensureSlots();
+    } else {
+      document.getElementById('sheetStatus').innerHTML =
+        `<div class="status-pill err">❌ No se pudo cargar la hoja. Verifica el link y que esté publicada como CSV.</div>`;
+    }
     setLoading(false);
-    btn.textContent = 'Cargar Regalos ✨'; btn.disabled = false;
+    btn.textContent = 'Guardar y Cargar ✨'; btn.disabled = false;
   }
 
-  async function fetchAndParseSheet(url) {
+  async function refreshAdminReservations() {
+    const savedRes = await sGet(STORAGE_RES);
+    reservations = savedRes ? JSON.parse(savedRes) : {};
+    renderAdminReservations();
+    if (gifts.length) renderGifts();
+  }
+
+  function renderAdminReservations() {
+    const el = document.getElementById('adminReservationsList');
+    const rows = gifts.map((g, i) => {
+      const names = reservations[i] || [];
+      return `<tr>
+        <td><strong>${g.name||'?'}</strong></td>
+        <td>${names.length} / ${g.quantity}</td>
+        <td>${names.length ? names.map(n=>`<span class="tag">${n}</span>`).join(' ') : '<span style="color:#c0b8a8">—</span>'}</td>
+      </tr>`;
+    }).join('');
+
+    if (!gifts.length) {
+      el.innerHTML = `<p style="color:#8a9a7a;font-size:13px;margin-top:8px">No hay regalos cargados aún.</p>`;
+      return;
+    }
+    el.innerHTML = `<table class="reservations-table">
+      <thead><tr><th>Regalo</th><th>Reservas</th><th>Nombres</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+  }
+
+  async function clearAllReservations() {
+    if (!confirm('¿Seguro que quieres borrar TODAS las reservas? Esta acción no se puede deshacer.')) return;
+    reservations = {};
+    gifts.forEach((_, i) => { reservations[i] = []; });
+    await sSet(STORAGE_RES, JSON.stringify(reservations));
+    renderAdminReservations();
+    if (gifts.length) renderGifts();
+    alert('✅ Todas las reservas fueron borradas.');
+  }
+
+  // ── Sheet parsing ─────────────────────────────────────────────────
+  async function fetchAndParseSheet(url, strict) {
     try {
       const res = await fetch(url);
       if (!res.ok) throw new Error();
       const text = await res.text();
-      parseCSV(text);
+      return parseCSV(text);
     } catch {
-      loadDemoData();
+      if (strict) return false;
+      return false;
     }
   }
 
   function parseCSV(text) {
     const lines = text.trim().split('\n');
-    if (lines.length < 2) { alert('La hoja parece vacía.'); return; }
+    if (lines.length < 2) return false;
     const headers = lines[0].split(',').map(h => h.trim().toLowerCase().replace(/"/g,''));
-    gifts = [];
+    const parsed = [];
     for (let i = 1; i < lines.length; i++) {
-      const vals = splitCSVLine(lines[i]);
+      const vals = splitCSV(lines[i]);
       if (vals.every(v => !v.trim())) continue;
       const obj = {};
       headers.forEach((h, idx) => { obj[h] = (vals[idx]||'').replace(/^"|"$/g,'').trim(); });
       obj.quantity = parseInt(obj.quantity) || 1;
-      gifts.push(obj);
+      parsed.push(obj);
     }
-    if (!gifts.length) { alert('No se encontraron regalos.'); return; }
-    ensureReservationSlots();
-    showCatalogue();
+    if (!parsed.length) return false;
+    gifts = parsed;
+    return true;
   }
 
-  function splitCSVLine(line) {
+  function splitCSV(line) {
     const res = []; let cur = '', inQ = false;
     for (let ch of line) {
       if (ch === '"') inQ = !inQ;
@@ -453,30 +672,11 @@
     res.push(cur); return res;
   }
 
-  function loadDemoData() {
-    gifts = [
-      { name: 'Pañales (Paquete)', recommendation: 'Pampers Swaddlers son los más suaves para piel de recién nacido.', store_link: 'https://www.amazon.com', emoji: '🧷', quantity: 4, priority: 'Imprescindible' },
-      { name: 'Monitor de Bebé', recommendation: 'El Eufy SpaceView tiene gran alcance e imagen muy nítida.', store_link: 'https://www.amazon.com', emoji: '📹', quantity: 1, priority: 'Imprescindible' },
-      { name: 'Set de Cobijas Swaddle', recommendation: 'Aden + Anais son las más suaves que encontramos.', store_link: 'https://www.amazon.com', emoji: '🌿', quantity: 3, priority: 'Muy recomendado' },
-      { name: 'Silla Mecedora', recommendation: '¡El Babybjörn Bliss — a los bebés les encanta!', store_link: 'https://www.amazon.com', emoji: '🪑', quantity: 1, priority: 'Muy recomendado' },
-      { name: 'Toallitas Húmedas (Caja)', recommendation: 'WaterWipes son 99.9% agua, ideales para piel sensible.', store_link: 'https://www.amazon.com', emoji: '🧴', quantity: 4, priority: 'Imprescindible' },
-      { name: 'Máquina de Ruido Blanco', recommendation: '¡El Hatch Rest es increíble — se controla desde el celular!', store_link: 'https://www.amazon.com', emoji: '🔊', quantity: 1, priority: 'Muy recomendado' },
-    ];
-    ensureReservationSlots();
-    showCatalogue();
-  }
-
-  function ensureReservationSlots() {
+  function ensureSlots() {
     gifts.forEach((_, i) => { if (!reservations[i]) reservations[i] = []; });
   }
 
-  function showCatalogue() {
-    document.getElementById('sheetSetup').style.display = 'none';
-    document.getElementById('stats').style.display = 'flex';
-    document.getElementById('filters').style.display = 'flex';
-    renderGifts();
-  }
-
+  // ── Public catalogue render ───────────────────────────────────────
   function spotsLeft(i) { return gifts[i].quantity - (reservations[i]||[]).length; }
 
   function renderGifts() {
@@ -505,23 +705,21 @@
       const pct = qty > 1 ? Math.round((taken/qty)*100) : (taken ? 100 : 0);
       const emoji = g.emoji || '🎁';
       const showBar = qty > 1;
-      const priorityClass = (g.priority||'').toLowerCase().replace(/\s+/g,'-');
+      const pClass = (g.priority||'').toLowerCase().replace(/\s+/g,'-');
 
-      return `
-      <div class="card ${full?'fully-reserved':''}" id="card-${i}">
+      return `<div class="card ${full?'fully-reserved':''}" id="card-${i}">
         <div class="card-img">
           <span>${emoji}</span>
           ${full ? `<div class="fully-reserved-badge">🌿 Completamente Reservado</div>`
-                 : (qty > 1 ? `<div class="spots-badge">${left} lugar${left>1?'es':''} disponible${left>1?'s':''}</div>` : '')}
-          ${showBar ? `
-          <div class="qty-bar-wrap">
+                 : qty > 1 ? `<div class="spots-badge">${left} lugar${left>1?'es':''} disponible${left>1?'s':''}</div>` : ''}
+          ${showBar ? `<div class="qty-bar-wrap">
             <div class="qty-label"><span>Reservados</span><span>${taken}/${qty}</span></div>
             <div class="qty-bar-bg"><div class="qty-bar-fill ${full?'full':''}" style="width:${pct}%"></div></div>
           </div>` : ''}
         </div>
         <div class="card-body">
           <div class="card-name">${g.name||'Regalo'}</div>
-          ${g.priority ? `<div class="card-priority priority-${priorityClass}">
+          ${g.priority ? `<div class="card-priority priority-${pClass}">
             ${g.priority.toLowerCase()==='imprescindible'?'⭐':'👍'} ${g.priority}
           </div>` : ''}
           ${g.recommendation ? `<div class="card-rec"><span>✨ Tip: </span>${g.recommendation}</div>` : ''}
@@ -548,19 +746,17 @@
     if (!name) { input.focus(); input.style.borderColor='#5a8040'; return; }
     if (spotsLeft(i) <= 0) return;
     if ((reservations[i]||[]).includes(name)) { alert(`¡${name} ya reservó este regalo!`); return; }
-
     if (!reservations[i]) reservations[i] = [];
     reservations[i].push(name);
     renderGifts();
-
-    // Save persistently
-    await saveReservations();
-
+    showSaving(true);
+    await sSet(STORAGE_RES, JSON.stringify(reservations));
+    showSaving(false);
     const left = spotsLeft(i);
     document.getElementById('modalMsg').textContent =
-      `¡Gracias, ${name}! 🎁 Reservaste "${gifts[i].name}" para el Baby Shower de Matías. ${left > 0
-        ? `¡Aún ${left===1?'queda':'quedan'} ${left} lugar${left>1?'es':''} disponible${left>1?'s':''}!`
-        : '¡Este regalo está completamente reservado!'} ¡Los papás estarán muy agradecidos!`;
+      `¡Gracias, ${name}! 🎁 Reservaste "${gifts[i].name}" para el Baby Shower de Matías. ${
+        left > 0 ? `¡Aún ${left===1?'queda':'quedan'} ${left} lugar${left>1?'es':''} disponible${left>1?'s':''}!`
+                 : '¡Este regalo está completamente reservado!'} ¡Los papás estarán muy agradecidos!`;
     document.getElementById('modal').classList.add('open');
   }
 
@@ -573,9 +769,6 @@
     renderGifts();
   }
 
-  document.getElementById('sheetUrl').addEventListener('keydown', e => { if(e.key==='Enter') loadSheet(); });
-
-  // Start
   init();
 </script>
 </body>
