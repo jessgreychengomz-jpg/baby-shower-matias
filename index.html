@@ -520,23 +520,26 @@
     const [savedUrl, savedRes] = await Promise.all([sGet(STORAGE_SHEET), sGet(STORAGE_RES)]);
     reservations = savedRes ? JSON.parse(savedRes) : {};
 
+    showView('publicView');
+
     if (savedUrl) {
       document.getElementById('adminSheetUrl').value = savedUrl;
-      await fetchAndParseSheet(savedUrl, false);
+      const ok = await fetchAndParseSheet(savedUrl, true);
+      if (ok) {
+        ensureSlots();
+        document.getElementById('noSheetMsg').classList.add('hidden');
+        document.getElementById('catalogueContent').classList.remove('hidden');
+        renderGifts();
+      } else {
+        document.getElementById('noSheetMsg').classList.remove('hidden');
+        document.getElementById('catalogueContent').classList.add('hidden');
+      }
+    } else {
+      document.getElementById('noSheetMsg').classList.remove('hidden');
+      document.getElementById('catalogueContent').classList.add('hidden');
     }
 
     setLoading(false);
-    showView('publicView');
-
-    if (!savedUrl || !gifts.length) {
-      document.getElementById('noSheetMsg').classList.remove('hidden');
-      document.getElementById('catalogueContent').classList.add('hidden');
-    } else {
-      document.getElementById('noSheetMsg').classList.add('hidden');
-      document.getElementById('catalogueContent').classList.remove('hidden');
-      ensureSlots();
-      renderGifts();
-    }
   }
 
   // ── Admin auth ────────────────────────────────────────────────────
@@ -592,6 +595,11 @@
       document.getElementById('sheetStatus').innerHTML =
         `<div class="status-pill ok">✅ Google Sheet conectado — ${gifts.length} regalos cargados</div>`;
       ensureSlots();
+      // Update public view immediately
+      document.getElementById('noSheetMsg').classList.add('hidden');
+      document.getElementById('catalogueContent').classList.remove('hidden');
+      renderGifts();
+      renderAdminReservations();
     } else {
       document.getElementById('sheetStatus').innerHTML =
         `<div class="status-pill err">❌ No se pudo cargar la hoja. Verifica el link y que esté publicada como CSV.</div>`;
